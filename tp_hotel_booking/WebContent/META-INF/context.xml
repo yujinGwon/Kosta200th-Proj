@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context reloadable="true">
+	 <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	 
+    <Resource
+    			name="jdbc:HotelBookingDB"   
+	 			auth="Container"		
+	 			type="javax.sql.DataSource"
+	 			driverClassName="oracle.jdbc.driver.OracleDriver"
+	 			url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
+	 			username="c##gyj"
+	 			password="oracle"
+    />
+    
+</Context>
