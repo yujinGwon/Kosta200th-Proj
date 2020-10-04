@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AccidentDAO">
+
+	<select id="blist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
+		select b_no from bus
+		order by b_no
+	</select>
+
+	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
+		select e_no, e_license from employer
+		order by e_no
+	</select>
+	
+	<insert id="repairInsert" parameterType="kr.kosta.bus.model.AccidentDTO">
+    	insert into repair(re_code, re_b_no, re_date, re_state)
+		select NEXT_RE_CODE, acc_b_no, acc_date, acc_state from accident where acc_no = #{acc_no} 
+	</insert>
+	
+	<insert id="accidentInsert" parameterType="kr.kosta.bus.model.AccidentDTO">
+		insert into accident(acc_no, acc_b_no, acc_e_no, acc_e_license, acc_state, acc_date, acc_located, acc_breakdown) 
+		values((select NVL(max(acc_no), 0)+1 from accident), #{acc_b_no}, #{acc_e_no}, #{acc_e_license}, #{acc_state}, to_date(#{acc_date}, 'YYYY-MM-DD"T"HH24:MI:SS'), #{acc_located}, #{acc_breakdown})
+	</insert>
+
+	<select id="accidentList" parameterType="HashMap" resultType="kr.kosta.bus.model.AccidentDTO">
+		select * from (select A.*, rownum r from (select * from accident order by acc_no desc) A)
+		where r >= #{start} and r &lt;= #{end}
+		
+		<!-- 
+		select d.* from ( select a.*, rownum rn from (
+		select a.acc_no, a.acc_e_license, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
+		from bus b, employer e, accident a
+		where b.b_no = a.acc_b_no and e.e_no = a.acc_e_no order by a.acc_no desc) a ) d
+		where rn between #{start} and #{end}
+		-->	
+		</select>
+	
+	<update id="accidentUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
+		update accident set acc_located = #{acc_located}, acc_breakdown = #{acc_breakdown} where acc_no = #{acc_no}
+	</update>
+	
+	<update id="acc_stateUpdate" parameterType="kr.kosta.bus.model.AccidentDTO">
+		update accident set acc_state ='정비접수' where acc_no = #{acc_no}
+	</update> 
+	
+	<delete id="accidentDelete" parameterType="Integer">
+		delete from accident where acc_no = #{acc_no}
+	</delete>
+	
+	<select id="accidentDetail" parameterType="Integer" resultType="kr.kosta.bus.model.AccidentDTO">
+		select * from accident where acc_no = #{acc_no}
+		
+		<!-- select a.acc_no, a.acc_e_license, a.acc_state, a.acc_date, a.acc_located, a.acc_breakdown, b.b_no as "acc_b_no", e.e_no as "acc_e_no"
+		from bus b, employer e, accident a
+		where b.b_no = a.acc_b_no and e.e_no = a.acc_e_no and acc_no = #{acc_no} -->
+	</select>
+
+	<select id="getaccidentCount" resultType="Integer">
+		select count(*) from accident
+	</select>
+	
+	<select id="getChart" resultType="kr.kosta.bus.model.AccidentDTO" >
+		<!-- select acc_date, count(acc_b_no) as "acc_b_no" from accident group by acc_date -->
+		<!-- select to_char(acc_date, 'MM') as acc_date, count(acc_b_no) as acc_b_no from accident group by acc_date -->
+		<!-- select acc_e_license, count(acc_b_no) as "acc_b_no" from accident group by acc_e_license -->
+		select substr(acc_date,4,2) as acc_date, count(acc_b_no) as acc_b_no
+from 	accident where acc_date between '2020-01-01' and '2020-12-31'group by substr(acc_date,4,2) order by acc_date
+	</select>
+	
+	<update id="busStateUpdate" parameterType="String">
+		update bus set b_state = '정비접수' where b_no = #{b_no}
+	</update>
+	
+	<select id="busState" parameterType="String" resultType="String">
+		select b_state from bus where b_no = #{b_no}
+	</select>
+
+</mapper>

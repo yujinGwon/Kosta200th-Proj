@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AllocationDAO">
+
+	<select id="blist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
+		select b_no from bus
+			where b_no not in (select a_b_no from allocation)
+			order by b_no
+	</select>
+	<select id="rlist" parameterType="HashMap" resultType="kr.kosta.bus.model.RouteDTO">
+			select r_no from route order by r_no
+	</select>
+	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
+		select e_no, e_name from employer
+			where e_no not in (select a_e_no from allocation)
+			order by e_no
+	</select>
+
+	<select id="allocationList" parameterType="HashMap" resultType="kr.kosta.bus.model.AllocationDTO">
+		select * from (select A.*, rownum r from (select * from
+			allocation where a_time like #{time} and a_r_no like #{nosun} order by a_r_no, a_b_no) A)
+			where r >= #{start} and r &lt;= #{end}
+	</select>
+	<select id="getAllocationCount" parameterType="String" resultType="Integer">
+		select count(*) from allocation
+		where a_time like #{time} and a_r_no like #{nosun}
+	</select>
+
+	<insert id="allocationInsert" parameterType="kr.kosta.bus.model.AllocationDTO">
+		insert into allocation values (#{a_b_no}, #{a_r_no}, #{a_e_no}, #{a_e_name}, #{a_time})
+	</insert>
+
+	<update id="allocationUpdate" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update allocation set a_time = #{a_time}
+			where a_b_no = #{a_b_no} and a_r_no = #{a_r_no}
+			and a_e_no = #{a_e_no}
+	</update>
+
+	<delete id="allocationDelete" parameterType="kr.kosta.bus.model.AllocationDTO">
+		delete from allocation where a_b_no = #{a_b_no}
+			and a_r_no = #{a_r_no} and a_e_no = #{a_e_no}
+	</delete>
+	
+	<update id="stateUpdateRun" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update bus set b_state = '운행중' where b_no = #{a_b_no}
+	</update>
+	
+	<update id="stateUpdateStop" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update bus set b_state = '대기중' where b_no = #{a_b_no}
+	</update>
+	
+	<select id="bstate" parameterType="String" resultType="String">
+		select b_state from bus where b_no = #{b_no}
+	</select>
+	
+	<update id="employerUpdateBno" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update employer set e_b_no = #{a_b_no} where e_no = #{a_e_no}
+	</update>
+	
+	<update id="employerUpdateBnull" parameterType="kr.kosta.bus.model.AllocationDTO">
+		update employer set e_b_no = null where e_no = #{a_e_no}
+	</update>
+
+</mapper>

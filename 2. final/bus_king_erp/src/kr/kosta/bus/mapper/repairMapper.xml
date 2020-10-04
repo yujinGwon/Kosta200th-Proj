@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RepairDAO">
+			<select id="repairList" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
+				select * from (select A.*, rownum r from (select * from repair order by re_code desc) A)
+				where r >= #{start} and r &lt;= #{end}
+			</select>
+			
+				<select id="buslist" parameterType="HashMap" resultType="kr.kosta.bus.model.BusDTO">
+              	 select b_no from bus
+              	where b_no not in (select a_b_no from allocation)
+                  order by b_no
+            </select>
+				
+			<select id="select" parameterType="HashMap" resultType="kr.kosta.bus.model.RepairDTO">
+				select * from repair where re_code = #{re_code}
+			</select>
+
+		
+			<insert id="accoInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+				insert into account(ac_code, ac_cost, ac_date, ac_bigo, ac_name, ac_state)   
+				select re_code, re_cost, re_date2, re_bigo, re_breakdown,'매입' from repair where re_code = #{re_code}
+			</insert>
+			
+			<update id="repairUpdateState" parameterType="kr.kosta.bus.model.RepairDTO">
+	            update repair set re_date2=sysdate,re_state='정비완료' where re_code=#{re_code,jdbcType=VARCHAR} 
+			</update>
+	
+			<update id="state" parameterType="kr.kosta.bus.model.RepairDTO">
+				update repair set re_state='정비완료' where re_code=#{re_code,jdbcType=VARCHAR} 
+			</update>
+	
+	
+			<insert id="repairInsert" parameterType="kr.kosta.bus.model.RepairDTO">
+				insert into repair(re_code,re_b_no,re_date,re_breakdown,re_state,re_bigo)
+				 values(NEXT_RE_CODE, #{re_b_no}, #{re_date},#{re_breakdown}, #{re_state},#{re_bigo})
+			</insert>
+	
+			<update id="repairUpdate" parameterType="kr.kosta.bus.model.RepairDTO">
+				update repair set re_state =#{re_state},re_cost=#{re_cost},re_breakdown=#{re_breakdown,jdbcType=VARCHAR},re_bigo=#{re_bigo,jdbcType=VARCHAR} where re_code=#{re_code} 
+			</update>
+		
+			<update id="busUpdatestate" parameterType="kr.kosta.bus.model.RepairDTO">
+				update bus set b_state = #{re_state} ,b_recent=sysdate where b_no =#{re_b_no}
+			</update>
+			
+			<update id="accUpdatestate" parameterType="String">
+				update accident set acc_state=#{re_state} where acc_b_no =#{re_b_no}
+			</update>
+			
+			<delete id="repairDelete" parameterType="String">
+				delete from repair where re_code = #{re_code}
+			</delete>
+			<select id="getRepairCount" resultType="Integer">
+				select count(*) from repair
+			</select>
+</mapper>

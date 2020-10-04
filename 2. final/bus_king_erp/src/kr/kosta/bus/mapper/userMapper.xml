@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="user" >
+	<insert id="insertUser" parameterType="java.util.Map">
+		insert into employer(e_no,e_pwd,e_name,enabled, authority)
+		values (#{e_no}, #{e_pwd}, #{e_name}, 1, #{authority})
+	</insert>
+	<select id="selectUser" resultType="java.util.Map">
+		select e_no as username, e_pwd as password,
+			e_name, authority, enabled
+		from employer
+		where e_no=#{e_no}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

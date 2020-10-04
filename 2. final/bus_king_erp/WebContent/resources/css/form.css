@@ -1,0 +1,149 @@
+@charset "UTF-8";
+.hidden-li {
+	height: 2px;
+	margin: 0	
+}
+.hidden {
+	opacity: 0;
+	height: 1px
+}
+.form {
+	position: relative;
+	width: 45%;
+	margin: 5% 27.5%;
+}
+fieldset {
+    padding: 20px;
+    width: 100%;
+    border: solid .5px #60ad5e;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+	/* background: #eaf8e6 */
+}
+
+legend {
+	position: relative;
+	width: 200px;
+	top: -10px;
+	font-size: 24px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 0px
+}
+legend:after {
+	content: "";
+    width: 90%;
+    height: 50%;
+    bottom: 0;
+    position: absolute;
+    left: 5%;
+    background: #FF7D19;
+    background: rgba(255, 123, 21, 0.77);
+    background: #60ad5e;
+    z-index: -1
+}
+
+/* -------------- with icon ----------------- */
+/* legend {
+	position: relative;
+	width: 200px;
+	top: 50px;
+	font-size: 24px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 40px
+}
+legend:after {
+	content: "";
+    width: 90%;
+    height: 50%;
+    bottom: 0;
+    position: absolute;
+    left: 5%;
+    background: #FF7D19;
+    background: rgba(255, 123, 21, 0.77);
+    background: #60ad5e;
+    z-index: -1
+}
+legend .formImg {
+	position: absolute;
+	width: 60px;
+	bottom: 50px;
+	left: 68px
+} */
+/* -------------- with icon ----------------- */
+
+
+.form-con {
+/* 	background: green; */
+	width: 280px;
+	margin: auto;
+	position: relative;
+    top: -30px;
+}
+.form-con input {
+	/* display: inline; */
+    margin: 5px 0;
+    padding: .3em .5em;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    background: #eee;
+    transition: all .3s
+}
+.form-con input:focus,
+.form-con select:focus,
+.form-con textarea:focus {
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+}
+.form-con .resized-input {
+    width: 280px
+}
+.form-con .br {
+	display: block;
+	margin-bottom: 2px
+}
+.form-con select {
+	width: 100px;
+	margin-right: 5px;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+	transition: all .3s
+}
+.form-con li {
+	margin: 15px 0;
+	font-size: 14px;
+
+}
+.form-con .radio {
+	display: inline;
+	font-weight: normal
+}
+.form-con label, .form-con span {
+	font-weight: bold;
+	font-size: 12px
+}
+.form-con textarea {
+	margin-top: 5px;
+	padding: .5em .5em;
+	width: 280px;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    background: #eee;
+    transition: all .3s
+}
+.form-con .btn-wrap {
+	width: 200px;
+	text-align: center;
+	margin: auto
+}
+.form-con .formBtn {
+	display: inline !important;
+	padding: 5px 20px;
+	margin: 15px 5px 0;
+	transition: all .3s;
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+.form-con .red {
+	color: #A72734;
+	border: solid .5px #A72734;
+}
+.form-con .red:hover {
+	color: #eee;
+	background: #A72734;
+}

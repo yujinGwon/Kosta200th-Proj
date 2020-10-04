@@ -1,0 +1,76 @@
+INSERT INTO ROUTE VALUES('1', '가산', '서울역', '5시 30분', '23시 15분', 15, 'map1.jpg', 1000, 1200, 800, 900, 500, 600);
+INSERT INTO ROUTE VALUES('2', '구로', '강남', '6시 10분', '22시 30분', 10, 'map2.jpg', 1000, 1200, 800, 900, 500, 600);
+INSERT INTO ROUTE VALUES('3', '수원', '사당', '7시 00분', '23시 10분', 20, 'map3.jpg', 2000, 2200, 1500, 1600, 1000, 1200);
+
+
+INSERT INTO EMPLOYER VALUES('0001', '총무맨', '871214-1111111', '총무부', '사원', NULL, NULL, '작성', 1, 15, NULL, NULL, NULL, NULL,
+NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO EMPLOYER VALUES('0002', '인사맨', '921214-1111111', '인사부', '사원', NULL, NULL, '작성', 1, 15, NULL, NULL, NULL, NULL,
+NULL, NULL, NULL, NULL, NULL, NULL);
+
+
+INSERT INTO COMMUTE VALUES(1, 2020, 7, 1, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(2, 2020, 7, 2, '평일', '0001', '총무맨', '총무부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(3, 2020, 7, 3, '평일', '0001', '총무맨', '총무부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(4, 2020, 7, 4, '주말', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(5, 2020, 7, 5, '주말', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(6, 2020, 7, 6, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(7, 2020, 7, 7, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(8, 2020, 7, 8, '평일', '0001', '총무맨', '총무부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(9, 2020, 7, 9, '평일', '0001', '총무맨', '총무부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(10, 2020, 7, 10, '평일', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(11, 2020, 7, 11, '주말', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(12, 2020, 7, 12, '주말', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(13, 2020, 7, 13, '평일', '0001', '총무맨', '총무부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(14, 2020, 7, 14, '평일', '0001', '총무맨', '총무부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(15, 2020, 7, 15, '평일', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+
+INSERT INTO COMMUTE VALUES(16, 2020, 7, 1, '평일', '0002', '인사맨', '인사부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(17, 2020, 7, 2, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(18, 2020, 7, 3, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(19, 2020, 7, 4, '주말', '0002', '인사맨', '인사부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(20, 2020, 7, 5, '주말', '0002', '인사맨', '인사부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(21, 2020, 7, 6, '평일', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(22, 2020, 7, 7, '평일', '0002', '인사맨', '인사부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(23, 2020, 7, 8, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(24, 2020, 7, 9, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(25, 2020, 7, 10, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(26, 2020, 7, 11, '주말', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(27, 2020, 7, 12, '주말', '0002', '인사맨', '인사부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(28, 2020, 7, 13, '평일', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(29, 2020, 7, 14, '평일', '0002', '인사맨', '인사부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(30, 2020, 7, 15, '평일', '0002', '인사맨', '인사부', '사원', '결근', 0);
+
+
+INSERT INTO COMMUTE VALUES(31, 2020, 8, 1, '주말', '0001', '총무맨', '총무부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(32, 2020, 8, 2, '주말', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(33, 2020, 8, 3, '평일', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(34, 2020, 8, 4, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(35, 2020, 8, 5, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(36, 2020, 8, 6, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(37, 2020, 8, 7, '평일', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(38, 2020, 8, 8, '주말', '0001', '총무맨', '총무부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(39, 2020, 8, 9, '주말', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(40, 2020, 8, 10, '평일', '0001', '총무맨', '총무부', '사원', '출근',18);
+INSERT INTO COMMUTE VALUES(41, 2020, 8, 11, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(42, 2020, 8, 12, '평일', '0001', '총무맨', '총무부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(43, 2020, 8, 13, '평일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(44, 2020, 8, 14, '평일', '0001', '총무맨', '총무부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(45, 2020, 8, 15, '공휴일', '0001', '총무맨', '총무부', '사원', '출근', 18);
+
+INSERT INTO COMMUTE VALUES(46, 2020, 8, 1, '주말', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(47, 2020, 8, 2, '주말', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(48, 2020, 8, 3, '평일', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(49, 2020, 8, 4, '평일', '0002', '인사맨', '인사부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(50, 2020, 8, 5, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(51, 2020, 8, 6, '평일', '0002', '인사맨', '인사부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(52, 2020, 8, 7, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(53, 2020, 8, 8, '주말', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(54, 2020, 8, 9, '주말', '0002', '인사맨', '인사부', '사원', '휴가', 0);
+INSERT INTO COMMUTE VALUES(55, 2020, 8, 10, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(56, 2020, 8, 11, '평일', '0002', '인사맨', '인사부', '사원', '결근', 0);
+INSERT INTO COMMUTE VALUES(57, 2020, 8, 12, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(58, 2020, 8, 13, '평일', '0002', '인사맨', '인사부', '사원', '병가', 0);
+INSERT INTO COMMUTE VALUES(59, 2020, 8, 14, '평일', '0002', '인사맨', '인사부', '사원', '출근', 18);
+INSERT INTO COMMUTE VALUES(60, 2020, 8, 15, '공휴일', '0002', '인사맨', '인사부', '사원', '출근', 18);

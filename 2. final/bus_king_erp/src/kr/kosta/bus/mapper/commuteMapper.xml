@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommuteDAO">
+	<select id="commuteList_day" parameterType="HashMap" resultType="kr.kosta.bus.model.Commute2DTO">
+		SELECT comm_e_dname as "c2_e_dname", 
+		COUNT(CASE WHEN comm_work='출근' THEN 1 ELSE NULL END) as "c2_chul", 
+		COUNT(CASE WHEN comm_work='결근' THEN 1 ELSE NULL END) as "c2_gyul", 
+		COUNT(CASE WHEN comm_work='병가' THEN 1 ELSE NULL END) as "c2_byung", 
+		COUNT(CASE WHEN comm_work='휴가' THEN 1 ELSE NULL END) as "c2_hyu", 
+		COUNT(*) as "c2_chong"
+		FROM commute
+		WHERE comm_year=#{comm_year_d} 
+		AND comm_month=#{comm_month_d} 
+		AND comm_day=#{comm_day_d}
+		GROUP BY comm_e_dname
+		ORDER BY comm_e_dname
+	</select>
+
+
+	<select id="commuteList_month" parameterType="HashMap" resultType="kr.kosta.bus.model.Commute3DTO">
+		SELECT comm_e_no, comm_e_name, comm_year, comm_month, 
+		COUNT(CASE WHEN comm_work='출근' THEN 1 ELSE NULL END) as "c3_chul", 
+		COUNT(CASE WHEN comm_work='결근' THEN 1 ELSE NULL END) as "c3_gyul", 
+		COUNT(CASE WHEN comm_work='병가' THEN 1 ELSE NULL END) as "c3_byung", 
+		COUNT(CASE WHEN comm_work='휴가' THEN 1 ELSE NULL END) as "c3_hyu"
+		FROM commute
+		WHERE comm_year=#{comm_year_m}
+		AND comm_month=#{comm_month_m}
+		AND comm_e_no=#{comm_e_no_m, jdbcType=VARCHAR}
+		GROUP BY comm_e_no, comm_e_name, comm_year, comm_month
+	</select>
+
+	<insert id="commuteInsert" parameterType="kr.kosta.bus.model.CommuteDTO">
+		insert into commute values(comm_seq.nextval, #{comm_year, jdbcType=VARCHAR}, #{comm_month, jdbcType=VARCHAR}, #{comm_day, jdbcType=VARCHAR}, #{comm_type_d}, 
+		#{comm_e_no, jdbcType=VARCHAR}, #{comm_e_name}, #{comm_e_dname}, #{comm_e_position}, #{comm_work}, #{comm_time})
+	</insert>
+	
+	<select id="ylist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_YEAR FROM COMMUTE ORDER BY COMM_YEAR DESC
+	</select>
+	
+	<select id="mlist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_MONTH FROM COMMUTE ORDER BY COMM_MONTH DESC
+	</select>
+	
+	<select id="dlist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_DAY FROM COMMUTE ORDER BY COMM_DAY
+	</select>
+	
+	<select id="elist" parameterType="HashMap" resultType="kr.kosta.bus.model.CommuteDTO">
+		SELECT DISTINCT COMM_E_NO FROM COMMUTE ORDER BY COMM_E_NO
+	</select>
+</mapper>

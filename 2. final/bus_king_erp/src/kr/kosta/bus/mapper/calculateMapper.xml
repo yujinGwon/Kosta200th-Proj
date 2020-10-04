@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CalculateDAO">
+
+	<select id="calList" parameterType="HashMap" resultType="kr.kosta.bus.model.CalculateDTO">
+	    select d.* from (
+            select c.*, rownum rn from (
+                select c.*, b.b_no as "cal_b_no" from bus b, calculate c
+            where b.b_no = c.cal_b_no order by c.cal_code desc) c ) d
+		where rn between #{start} and #{end}
+	</select>
+	
+	<insert id="calInsert" parameterType="kr.kosta.bus.model.CalculateDTO">
+		insert into calculate (cal_code, cal_date, cal_b_no, cal_hap_c,
+								cal_hap_m, cal_total, cal_nametag, cal_bigo)
+			values(NEXT_CAL_CODE, #{cal_date}, #{cal_b_no},
+										#{cal_hap_c}, #{cal_hap_m}, #{cal_total},
+											#{cal_nametag}, #{cal_bigo} )
+	</insert>
+	
+	<select id="getCalculate" parameterType="String" resultType="kr.kosta.bus.model.CalculateDTO">
+		select b.b_no as "c.cal_b_no", 
+			c.cal_code, c.cal_date, c.cal_hap_c, c.cal_hap_m, c.cal_total, c.cal_nametag, c.cal_bigo
+				from bus b, calculate c
+		where b.b_no = c.cal_b_no and cal_code = #{cal_code}
+	</select>
+	
+	<update id="calUpdate" parameterType="kr.kosta.bus.model.CalculateDTO">
+		update calculate set cal_date = sysdate, cal_bigo = #{cal_bigo} where cal_code = #{cal_code}
+	</update>
+	
+	<select id="getCalCount" resultType="Integer">
+		select count(*) from calculate
+	</select>
+	
+	<!-- ************************************************************************************************************** -->
+	<!-- 회계에도 인서트하는 매퍼 -->
+	<insert id="accountInsert" parameterType="kr.kosta.bus.model.CalculateDTO">
+		insert into account(ac_code, ac_cost, ac_date, ac_bigo, ac_name, ac_state)   
+		select cal_code, cal_total, cal_date, cal_bigo, cal_nametag, '매출' from calculate where cal_code = #{cal_code, jdbcType=VARCHAR}
+	</insert>
+	
+	<!-- 회계에 인서트하기 위해 칼코드 가져오는 매퍼 -->
+	<select id="calCode" resultType="String">
+		select * from (select cal_code from calculate order by cal_code desc) where rownum=1
+	</select>
+	<!-- ************************************************************************************************************** -->
+	
+	<select id="getBuslist" resultType="kr.kosta.bus.model.BusDTO">
+		select b_no from bus
+	</select>
+</mapper>

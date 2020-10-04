@@ -1,0 +1,29 @@
+select * from users;
+drop table users;
+
+create table users (
+    userid number not null primary key,
+    name varchar2(50) not null,
+    passwd varchar2(100) not null,
+    enabled number(1) default 1,        -- boolean 타입으로 설정도 가능(계정 사용여부)
+    authority varchar(30)
+);
+
+insert into users(userid, name, passwd,enabled, authority) 
+ values(1,'kingsmile','1',default, '관리자');
+ commit;
+
+----------------------------
+CREATE TABLE USER(
+    no int auto_increment primary key,
+    id varchar(30) not null,
+    password varchar(30) not null,
+    enabled boolean not null
+);
+
+
+CREATE TABLE USER_AUTH
+(
+    no int not null,
+    authority varchar(30) not null
+);

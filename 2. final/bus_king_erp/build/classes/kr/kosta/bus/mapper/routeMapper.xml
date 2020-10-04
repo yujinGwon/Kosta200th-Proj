@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.kosta.bus.model.RouteDAO">
+	<select id="routeList" resultType="kr.kosta.bus.model.RouteDTO">
+		select * from route order by r_no
+	</select>
+	
+	<insert id="routeInsert" parameterType="kr.kosta.bus.model.RouteDTO">
+		insert into route values (#{r_no}, #{r_start}, #{r_end}, 
+			#{r_point0}, #{r_point1},#{r_point2},#{r_point3},#{r_point4},#{r_point5},
+			#{r_map}, #{r_pay_adult}, #{r_pay_teen}, #{r_pay_kid})
+	</insert>
+	
+	<update id="routeUpdate" parameterType="kr.kosta.bus.model.RouteDTO">
+		update route set r_no = #{r_no}, r_start = #{r_start}, r_end = #{r_end}, 
+			r_point0 = #{r_point0}, r_point1 = #{r_point1}, r_point2 = #{r_point2},
+			r_point3 = #{r_point3}, r_point4 = #{r_point4}, r_point5 = #{r_point5},
+			r_map = #{r_map}, r_pay_adult = #{r_pay_adult}, r_pay_teen = #{r_pay_teen}, r_pay_kid = #{r_pay_kid}
+			where r_no = #{r_no}
+	</update>
+	
+	<delete id="routeDelete" parameterType="String">
+		delete from route where r_no = #{r_no}
+	</delete>
+</mapper>

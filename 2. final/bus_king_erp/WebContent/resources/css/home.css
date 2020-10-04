@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+body {
+	font-family: 'Arimo', sans-serif;
+	color: #333;
+}
+.home-wrap {
+	position: relative;
+	width: 40%;
+	height: 250px;
+	margin: auto;
+	margin-top: 15%;
+	text-align: center
+}
+.home-wrap h1 {
+	font-size: 60px
+}
+.home-wrap .content {
+	margin: 15px 0
+}
+.home-wrap .btn-wrap {
+	position: absolute;
+	width: 320px;
+	left: 50%;
+	margin-left: -160px;
+	bottom: 0
+}
+.home-wrap a {
+	position: absolute;
+	bottom: 0;
+	display: block;
+	width: 150px;
+	line-height: 30px;
+	font-size: 12px;
+    cursor: pointer;
+    transition: all .1s;
+    color: #207637;
+    border-radius:30px;
+    
+}
+.home-wrap a:last-child {
+	left: 180px;
+	background: #A72734;
+	color: #eee
+}
+.home-wrap a:hover {
+    background: rgba(25, 103, 46, 0.83);
+    color: #eee
+}
+.home-wrap a:last-child:hover {
+	background: #A72734;
+    color: #eee
+}
+
+.home-wrap a {
+    display: block;
+    padding: 0 10px;
+    background: pink;
+    width: 150px;
+    background: #000;
+    line-height: 50px;
+    text-decoration: none;
+    border-radius: 75px;
+    background: rgba(25, 103, 46, 0.83);
+    color: #eee;
+    transition: all .3s;
+    transform: translateY(-5px)
+}
+.home-wrap a:after {
+    content: "";
+    width: 150px;
+    height: 0;
+    margin-top: 30px;
+    margin-left: -75px;
+    display: block;
+    position: fixed;
+    left: 50%;
+    color: #999;
+    z-index: 1;
+    -webkit-box-shadow: 0px 20px 27px 1.5px #000000;
+       -moz-box-shadow: 0px 20px 27px 1.5px #000000;
+            box-shadow: 0px 20px 27px 1.5px #000;
+    transition: all .3s
+    /*transform: translateY(5px)*/
+}
+.home-wrap a:hover {
+    background:  rgba(7, 131, 40, 0.69);
+    transform: translateY(0)
+}
+.home-wrap a:hover:after {
+    transform: translateY(-5px);
+    width: 140px;
+    -webkit-box-shadow: 5px 20px 27px 1.8px #000000;
+       -moz-box-shadow: 5px 20px 27px 1.8px #000000;
+            box-shadow: 5px 20px 27px 1.8px #000;
+}
+.home-wrap a:last-child:hover {
+	background: rgba(195, 30, 47, 0.86);
+    color: #eee
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PayDAO">
+	<select id="payList_n" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.PayDTO">
+	</select>
+
+	<select id="payList" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.PayDTO">
+		select p.pay_code, p.pay_year, p.pay_month, p.pay_day,
+		p.pay_e_no,
+		e.e_name as "pay_e_name", e.e_dname as "pay_e_dname",
+		e.e_position as "pay_e_position", p.pay_chul, p.pay_work,
+		p.pay_work_t,
+		p.pay_p, p.pay_p_t, p.pay_bob, p.pay_car, p.pay_m,
+		p.pay_tax, p.pay_total,
+		p.pay_nametag, p.pay_bigo
+		from pay p join
+		employer e on
+		p.pay_e_no = e.e_no
+		where p.pay_year=#{pay_year} and
+		p.pay_month=#{pay_month} and p.pay_e_no=#{pay_e_no, jdbcType=VARCHAR}
+	</select>
+
+	<insert id="payInsert" parameterType="kr.kosta.bus.model.PayDTO">
+		insert into pay values
+		(next_pay_code, #{pay_year}, #{pay_month}, #{pay_day},
+		#{pay_e_no}, #{pay_e_name}, #{pay_e_dname}, #{pay_e_position},
+		#{pay_chul}, #{pay_work}, #{pay_work_t}, #{pay_p}, #{pay_p_t}, #{pay_bob},
+		#{pay_car}, #{pay_m},
+		#{pay_tax}, #{pay_total}, #{pay_nametag}, #{pay_bigo})
+	</insert>
+
+	<select id="ylist" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_year from pay order by pay_year desc
+	</select>
+
+	<select id="mlist" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_month from pay order by pay_month desc
+	</select>
+
+	<select id="elist" parameterType="HashMap"
+		resultType="kr.kosta.bus.model.PayDTO">
+		select distinct pay_e_no from pay order by pay_e_no
+	</select>
+
+	<!-- 회계에도 인서트하는 매퍼 -->
+	<insert id="accoInsert"
+		parameterType="kr.kosta.bus.model.PayDTO">
+		insert into account(ac_code, ac_cost, ac_date, ac_bigo,
+		ac_name, ac_state)
+		select pay_code, pay_total, pay_day, pay_bigo, pay_nametag, '매입' from pay
+		where pay_code = #{pay_code}
+	</insert>
+
+	<!-- 회계에 인서트하기 위해 칼코드 가져오는 매퍼 -->
+	<select id="payCode" resultType="String">
+		select * from (select pay_code
+		from pay order by pay_code desc) where rownum=1
+	</select>
+
+	<select resultType="Integer"
+		parameterType="kr.kosta.bus.model.PayDTO" id="payCheck">
+		select count(*) from pay where pay_year = #{pay_year} and pay_month =
+		#{pay_month} and pay_e_no = #{pay_e_no}
+	</select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AccountDAO">
+
+	<!-- <select id="selboxlist" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
+		select * from (select A.*, rownum r from (select * from
+			account where ac_state like #{state} and ac_code LIKE #{ac_code}
+				 order by ac_code) A)
+			where r >= #{start} and r &lt;= #{end}
+	</select> -->
+	
+	<select id="accountListState" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
+		select * from (select A.*, rownum r from (select * from
+			account where ac_state like #{cnt_state} order by ac_code desc) A)
+	</select>
+	
+	<select id="accountListCode" parameterType="HashMap" resultType="kr.kosta.bus.model.AccountDTO">
+		select * from (select A.*, rownum r from (select * from
+			account where ac_code like #{cnt_code} order by ac_code desc) A)
+	</select>
+	
+	<select id="getAccountCountState" parameterType="String" resultType="Integer">
+		select count(*) from account
+			where ac_state like #{cnt_state}
+	</select>
+	
+	<select id="getAccountCountCode" parameterType="String" resultType="Integer">
+		select count(*) from account
+			where ac_code like #{cnt_code}
+	</select>
+	
+	<select id="getAccount" parameterType="String" resultType="kr.kosta.bus.model.AccountDTO">
+		select * from account where ac_code = #{ac_code}
+	</select>
+	<update id="accountUpdate" parameterType="kr.kosta.bus.model.AccountDTO">
+		update account set ac_bigo = #{ac_bigo} where ac_code = #{ac_code}
+	</update>
+	
+</mapper>

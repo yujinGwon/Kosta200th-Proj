@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmployerDAO">
+   <select id="employerList" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
+      select * from (select A.*, rownum r from (select * from employer order by e_no desc) A)
+      where r >= #{start} and r &lt;= #{end}
+   </select>
+   
+   <select id="employerUpdate2" parameterType="kr.kosta.bus.model.EmployerDTO" resultType="kr.kosta.bus.model.EmployerDTO">
+      select * from employer where e_no = #{e_no}
+   </select>
+   
+   <select id="employerSearch" parameterType="HashMap" resultType="kr.kosta.bus.model.EmployerDTO">
+      select * from employer where e_no = #{e_no}
+   </select>
+   
+   <insert id="employerInsert" parameterType="kr.kosta.bus.model.EmployerDTO">
+      insert into employer values (NEXT_E_NO, #{e_name}, #{e_jumin}, #{e_dname}, #{e_position},
+          null, #{e_license}, #{e_contract}, #{e_career}, #{e_break},
+             #{e_marriage}, #{e_disabled}, #{e_hobby}, #{e_speciality}, #{e_phone}, 
+             #{e_pwd}, #{e_mail}, #{e_add}, #{e_start}, null,
+             1, #{authority})
+   </insert>
+   
+   <select id="employerSelect" parameterType="String" resultType="String">
+      select e_no from employer where e_jumin = #{aaa}
+   </select>
+   
+   <update id="employerUpdate3" parameterType="HashMap">
+      update employer set e_pwd = #{e_pwd} where e_no = #{e_no}
+   </update>
+   
+   <update id="employerUpdateNopwd" parameterType="kr.kosta.bus.model.EmployerDTO">
+      update employer set e_no = #{e_no}, e_name = #{e_name}, e_jumin = #{e_jumin}, e_dname = #{e_dname}, e_position = #{e_position},
+      e_license = #{e_license}, e_contract = #{e_contract}, e_career = #{e_career}, e_break = #{e_break}, e_marriage = #{e_marriage}, e_disabled = #{e_disabled},
+      e_hobby = #{e_hobby}, e_speciality = #{e_speciality}, e_phone = #{e_phone}, e_mail = #{e_mail}, e_add = #{e_add}, 
+      e_start = #{e_start}, enabled = 1, authority = #{authority} where e_no = #{e_no}
+   </update>
+   
+   <update id="employerUpdate" parameterType="kr.kosta.bus.model.EmployerDTO">
+      update employer set e_no = #{e_no}, e_name = #{e_name}, e_jumin = #{e_jumin}, e_dname = #{e_dname}, e_position = #{e_position},
+      e_license = #{e_license}, e_contract = #{e_contract}, e_career = #{e_career}, e_break = #{e_break}, e_marriage = #{e_marriage}, e_disabled = #{e_disabled},
+      e_hobby = #{e_hobby}, e_speciality = #{e_speciality}, e_phone = #{e_phone}, e_pwd = #{e_pwd}, e_mail = #{e_mail}, e_add = #{e_add}, 
+      e_start = #{e_start}, enabled = 1, authority = #{authority} where e_no = #{e_no}
+   </update>
+   
+   <delete id="employerDelete" parameterType="String">
+      delete from employer where e_no = #{e_no}
+   </delete>
+   <select id="getEmployerCount" resultType="Integer">
+      select count(*) from employer
+   </select>
+</mapper>

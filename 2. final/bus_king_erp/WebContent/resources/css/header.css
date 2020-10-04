@@ -1,0 +1,178 @@
+@charset "utf-8";
+/* @import url(https://fonts.gooleapis.com/css?family=Song+Myung&display=swap|Gothic+A1|Arimo) */
+@import url(all.min.css);
+@import url(normalize.css);
+
+/*font*/
+body {
+    font-family: 'Gothic A1', sans-serif;
+    letter-spacing: 1.3px;
+    color: #333;
+    background: rgb(219, 225, 226);
+}
+.gnb {
+    font-family: 'Gothic A1', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
+header h1 {
+    font-family: 'Arimo', sans-serif;
+}
+
+/*layout*/
+.wrap {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    z-index: 20;
+/*     overflow: hidden; */
+}
+header {
+    height: 50px;
+    background: rgba(25, 103, 46, 0.83);
+    color: #eef8e8;
+}
+header h1, .gnb, header ul {
+    position: absolute;
+    top: 15px;
+    height: 20px;
+    line-height: 20px
+}
+header h1 {
+    left: 20px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+}
+header h1 img {
+	position: absolute;
+	width: 120px;
+	left:0;
+	top: -2px
+}
+header ul {
+	left: 17.5%;
+	font-size: 12px
+}
+header li {
+	float: left;
+}
+header .logout-li {
+	margin-left: 50px
+}
+header .logout {
+	border: solid .5px #eee;
+	padding: 3px 10px;
+	line-height: 1.5px;
+	padding-bottom: 5px;
+	transition: all .1s
+}
+header .logout:hover {
+	background: #333;
+	color: #eee;
+	border: solid .5px #333;
+}
+header .saan {
+	display: block;
+	margin-top: 10px
+	
+}
+.gnb {
+    right: 0;
+    width: auto;
+}
+.gnb a {
+    display: block;
+    float: left;
+    margin: 0 20px;
+    padding: 0 5px
+}
+
+/* 메뉴 선택했을 때 블록 표시? */
+.gnb a.activePage{
+    color: green;
+    border-bottom: solid;
+    border-width: 3px;    
+}
+
+/*jQuery*/
+.gnb a.on {
+    background: rgb(151, 190, 161);
+    color: #222;
+}
+
+.lnb {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 15%;
+    height: 95%;
+    background: #eee;
+    float: left;
+    z-index: 30;
+}
+.lnb .lnb-con {
+    position: absolute;
+    width: 90%;
+    margin-left: 5%;
+	height: auto;
+    
+    background: rgb(207, 227, 213);
+    top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 1;
+    z-index: 10;
+    transition: all .2s;
+    
+    -webkit-box-shadow: 0px 0px 15px -2px rgba(38,38,38,0.46); 
+    box-shadow: 0px 0px 15px -2px rgba(38,38,38,0.46);
+}
+
+.lnb a {
+    display: block;
+    padding: 10px;
+    position: relative;
+    font-size: 14px;
+    transition: all .3s
+}
+/*jQuery*/
+.lnb .lnb-con.on {
+    opacity: 1;
+    z-index: 3
+}
+.lnb .lnb-con a:after {
+    content: '';
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(25, 103, 46, 0.83);
+    transition: all .4s;
+    z-index: -1
+}
+.lnb .lnb-con a:hover:after {
+    width: 100%;
+}
+.lnb .lnb-con a:hover {
+    background: rgb(184, 211, 192);
+}
+
+/*jQuery*/
+.lnb .lnb-con a.on {
+    background: rgb(184, 211, 192);
+/*    border-bottom: solid 1px #19672e;*/
+    border-left: solid 5px #19672e;
+}
+
+main {
+    position: absolute;
+    height: auto;
+    width: 85%;
+    left: 15%;
+    top: 50px;
+    float: right;
+    background: transparent;
+    z-index: 10
+}
